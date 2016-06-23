@@ -8,6 +8,7 @@ var SongQueue = Backbone.Collection.extend({
     //this is fire through an enqueue call
     this.on('add', function() {
       if (this.length === 1) {
+        console.log(this.model.title);
         this.playFirst();
       }
     });

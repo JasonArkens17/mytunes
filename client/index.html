@@ -27,20 +27,7 @@
 
     <script>
       $(function() {
-        $.ajax({
-          url: 'https://api.parse.com/1/classes/songs/',
-
-          type: 'GET',
-
-          // The name of the callback parameter, as specified by the YQL service
-          contentType: 'application/JSON',
-
-          // Tell jQuery we're expecting JSONP
-
-
-          // Work with the response
-          success: function(response) {
-            var library = new Songs(response.results);
+        var library = new Songs();
             var app = new AppModel({
               library: library
             });
@@ -51,9 +38,9 @@
             });
 
             // put the view onto the screen
-            $('body').append(appView.render()); // server response
-          }
-        })
+            $('body').append(appView.render());
+        
+      
 
       });
     </script>
