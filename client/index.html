@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
+
   <body>
     <!-- Scripts may be placed anywhere on a page. But FYI, they block rendering of elements
      below them until after the scripts load-->
+
     <script src="bower_components/jquery/jquery.min.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/backbone/backbone.js"></script>
+    <script src="env/config.js"></script>
+
 
     <script src="data/data.js"></script>
 
@@ -23,16 +27,36 @@
 
     <script>
       $(function() {
-        // set up model objects
-        var library = new Songs(songData);
-        var app = new AppModel({library: library});
+        $.ajax({
+          url: 'https://api.parse.com/1/classes/songs/',
 
-        // build a view for the top level of the whole app
-        var appView = new AppView({model: app});
+          type: 'GET',
 
-        // put the view onto the screen
-        $('body').append(appView.render());
+          // The name of the callback parameter, as specified by the YQL service
+          contentType: 'application/JSON',
+
+          // Tell jQuery we're expecting JSONP
+
+
+          // Work with the response
+          success: function(response) {
+            var library = new Songs(response.results);
+            var app = new AppModel({
+              library: library
+            });
+
+            // build a view for the top level of the whole app
+            var appView = new AppView({
+              model: app
+            });
+
+            // put the view onto the screen
+            $('body').append(appView.render()); // server response
+          }
+        })
+
       });
     </script>
   </body>
+
 </html>
