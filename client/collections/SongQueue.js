@@ -6,10 +6,11 @@ var SongQueue = Backbone.Collection.extend({
   initialize: function() {
   //  on enqueue
     //this is fire through an enqueue call
-    this.on('add', function() {
+    this.on('add', function(model) {
       if (this.length === 1) {
-        console.log(this.model.title);
+        console.log(model.attributes);
         this.playFirst();
+        
       }
     });
 
@@ -34,7 +35,9 @@ var SongQueue = Backbone.Collection.extend({
   },
 
   playFirst: function() {
-    this.at(0).play();  
+    this.at(0).play(); 
+    this.at(0).set('playCount', this.at(0).get('playCount') + 1); 
+    console.log(this.at(0).get('playCount'));
   }
 
 });
