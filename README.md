@@ -10,7 +10,9 @@ Docker, AWS EC2, AWS Lambda.
 
 ####Build tools: 
 Bower, ESlint.
-Testing: Mocha, Chai.
+
+####Testing: 
+Mocha, Chai.
 
 ### Installing Dependencies
 
